@@ -1,11 +1,11 @@
 import { FiltersLayout } from "../ui/filters-layout";
 import { useFilters } from "../model/filters.model";
-import { sortOptions, statusOptions, tagsOptions } from "../constants";
-import {UiTextField} from "@/shared/ui/form/ui-text-field";
-import {UiSelectField} from "@/shared/ui/form/ui-select-field";
+import { categoryOptions } from "../constants";
+import { UiTextField } from "@/shared/ui/form/ui-text-field";
+import { UiSelectField } from "@/shared/ui/form/ui-select-field";
 
 export function SuggestionsFilters() {
-    const { data, updateOrder, updateQuery, updateStatus, updateTag } =
+    const { data, updateQuery, updateCategory } =
         useFilters();
 
     return (
@@ -16,28 +16,12 @@ export function SuggestionsFilters() {
                 value={data.query}
             />
             <UiSelectField
-                label="Фильтр по тегам"
+                label="Фильтр по категории"
                 idKey="id"
                 labelKey="label"
-                options={tagsOptions}
-                value={data.tag}
-                onChange={updateTag}
-            />
-            <UiSelectField
-                label="Фильтр по статусу"
-                idKey="id"
-                labelKey="label"
-                options={statusOptions}
-                value={data.status}
-                onChange={updateStatus}
-            />
-            <UiSelectField
-                label="Сортировать по"
-                idKey="id"
-                labelKey="label"
-                options={sortOptions}
-                value={data.order}
-                onChange={updateOrder}
+                options={categoryOptions}
+                value={data.category}
+                onChange={updateCategory}
             />
         </FiltersLayout>
     );

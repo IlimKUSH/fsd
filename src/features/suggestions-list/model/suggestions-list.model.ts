@@ -5,34 +5,26 @@ export function useSuggestionsList() {
     const data: SuggestionEntity[] = [
         {
             id: 1,
-            createdAt: new Date(),
-            description: "Description",
-            title: "title 1",
-            grade: 4,
-            status: { id: 1, label: "Открыто" },
-            tags: [{ id: 1, label: "Тег1" }],
+            title: "Яблоки «Голден Делишес»",
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Golden_delicious_apple.jpg/1200px-Golden_delicious_apple.jpg",
+            price: "150 KGS/кг",
+            category: { id: 1, label: "Фрукты" },
         },
         {
             id: 2,
-            createdAt: new Date(Date.now() - 100000000),
-            description: "Description",
-            title: "title 2",
-            grade: 6,
-            status: { id: 2, label: "Закрыто" },
-            tags: [{ id: 2, label: "Тег2" }],
+            title: "Мёд натуральный цветочный",
+            image: "https://www.dobryj-pasechnik.ru/images/photos/small/article1006.jpg",
+            price: "800 KGS/кг",
+            category: { id: 2, label: "Продукты питания" },
         },
     ];
 
     const { data: filtersData } = useFilters();
 
-    console.log(filtersData)
-
     let preparedData = data;
 
-    console.log(preparedData)
-
     preparedData = preparedData.filter((item) => {
-        if (filtersData.status && filtersData.status !== item.status.id) {
+        if (filtersData.category && filtersData.category !== item.category.id) {
             return false;
         }
 
@@ -43,12 +35,6 @@ export function useSuggestionsList() {
         preparedData = preparedData.filter((item) =>
             item.title.toLowerCase().includes(filtersData.query.toLowerCase())
         );
-    }
-
-    if (filtersData.order === "createAt-desc") {
-        preparedData.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-    } else if (filtersData.order === "grade-desc") {
-        preparedData.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
     }
 
     return preparedData;

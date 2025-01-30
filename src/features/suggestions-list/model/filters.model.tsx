@@ -7,15 +7,11 @@ import {
     useMemo,
     useState,
 } from "react";
-import { StatusId, TagId } from "./entities";
-
-export type SuggestionOrder = "grade-desc" | "createAt-desc";
+import { CategoryId } from "./entities";
 
 export type SuggestionFiltersData = {
     query: string;
-    tag: TagId | undefined;
-    status: StatusId | undefined;
-    order: SuggestionOrder;
+    category: CategoryId | undefined;
 };
 
 const filtersContext = createContext<{
@@ -25,10 +21,8 @@ const filtersContext = createContext<{
 
 export function FiltersDataProvider({ children }: { children: ReactNode }) {
     const [data, setData] = useState<SuggestionFiltersData>({
-        order: 'createAt-desc',
         query: "",
-        status: undefined,
-        tag: undefined,
+        category: undefined,
     });
     return (
         <filtersContext.Provider value={useMemo(() => ({ data, setData }), [data])}>
@@ -46,21 +40,13 @@ export function useFilters() {
     const updateQuery = (query: string) => {
         setData((d) => ({ ...d, query }));
     };
-    const updateTag = (tag: TagId | undefined) => {
-        setData((d) => ({ ...d, tag }));
-    };
-    const updateStatus = (status: StatusId | undefined) => {
-        setData((d) => ({ ...d, status }));
-    };
-    const updateOrder = (order: SuggestionOrder) => {
-        setData((d) => ({ ...d, order }));
+    const updateCategory = (category: CategoryId | undefined) => {
+        setData((d) => ({ ...d, category }));
     };
 
     return {
         data,
-        updateStatus,
-        updateTag,
+        updateCategory,
         updateQuery,
-        updateOrder,
     };
 }

@@ -1,12 +1,6 @@
-export type TagId = number;
-export type StatusId = number;
+export type CategoryId = number;
 
-export type TagEntity = {
-    id: number;
-    label: string;
-};
-
-export type StatusEntity = {
+export type CategoryEntity = {
     id: number;
     label: string;
 };
@@ -14,9 +8,7 @@ export type StatusEntity = {
 export type SuggestionEntity = {
     id: number;
     title: string;
-    description: string;
-    tags: TagEntity[];
-    status: StatusEntity;
-    createdAt: Date;
-    grade: number;
+    image: string;
+    category: CategoryEntity;
+    price: string;
 };
